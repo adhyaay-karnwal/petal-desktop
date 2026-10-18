@@ -1,0 +1,30 @@
+{
+  "name": "@petal/web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Petal marketing website (static)",
+  "scripts": {
+    "dev": "vite --port 4318",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview --port 4318",
+    "typecheck": "tsc -b"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^5.2.0",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.7"
+  },
+  "dependencies": {
+    "@fontsource-variable/geist-mono": "^5.3.0",
+    "@fontsource-variable/inter": "^5.3.0",
+    "@fontsource-variable/manrope": "^5.3.0",
+    "@fontsource-variable/newsreader": "^5.3.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  }
+}

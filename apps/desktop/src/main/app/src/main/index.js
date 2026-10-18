@@ -1073,6 +1073,14 @@ function setupMenu() {
 					click: () => petalUpdater.checkNow()
 				},
 				{ type: "separator" },
+				{
+					label: "Connect Figma…",
+					click: () => electron.shell.openExternal(`${getWebUrl()}/figma/connect?source=electron`)
+				}, {
+					label: "Connect GitHub…",
+					click: () => electron.shell.openExternal(`${getWebUrl()}/github/connect?source=electron`)
+				},
+				{ type: "separator" },
 				{ role: "services" },
 				{ type: "separator" },
 				{ role: "hide" },
@@ -1107,6 +1115,12 @@ function setupMenu() {
 				...isMac ? [] : [{
 					label: "Check for Updates…",
 					click: () => petalUpdater.checkNow()
+				}, {
+					label: "Connect Figma…",
+					click: () => electron.shell.openExternal(`${getWebUrl()}/figma/connect?source=electron`)
+				}, {
+					label: "Connect GitHub…",
+					click: () => electron.shell.openExternal(`${getWebUrl()}/github/connect?source=electron`)
 				}, { type: "separator" }],
 				isMac ? { role: "close" } : { role: "quit" }
 			]

@@ -108,8 +108,9 @@ ${opts.current ? `<p class="ok">Currently connected as <b>${esc(opts.current.han
   <input id="token" name="token" type="password" autocomplete="off" spellcheck="false" placeholder="figd_…" required />
   <p class="hint">In Figma: avatar menu → <b>Settings</b> → <b>Security</b> → <b>Personal access tokens</b> → Generate new token, with scope
   <code>file_content:read</code> (read-only). <a href="https://www.figma.com/developers/api#access-tokens" target="_blank" rel="noreferrer">How to create one</a>.</p>
-  <button type="submit">Connect Figma</button>
+  <button type="submit">${opts.current ? 'Replace token' : 'Connect Figma'}</button>
 </form>
+${opts.current ? `<form method="post" action="/figma/connect/remove" class="links"><input type="hidden" name="source" value="${src}" /><button type="submit" class="secondary">Disconnect Figma</button></form>` : ''}
 ${opts.source === 'electron' ? `<div class="links"><a href="${esc(failLink)}">Cancel and return to Petal</a></div>` : ''}`;
   return shell('Connect Figma', body, disableOnSubmit);
 }

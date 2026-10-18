@@ -209,6 +209,15 @@ export function registerAccountIntegrations(app: App) {
     return c.html(figmaDonePage({ handle: me.handle, source }));
   });
 
+  // Disconnect button on the connect page (the desktop has no settings screen for this).
+  app.post('/figma/connect/remove', async (c) => {
+    const user = c.get('user');
+    if (!user) return c.html(signedOutPage('Figma'), 401);
+    if (!sameOrigin(c)) return c.text('Forbidden', 403);
+    saveFigmaToken(user.id, null, null, 'disabled');
+    return c.html(figmaConnectPage({ source: (await formField(c, 'source')) || 'web', current: null }));
+  });
+
   app.post('/figma/exchange', (c) =>
     c.json({ error: 'Figma OAuth is not used here. Connect with a personal access token at /figma/connect.', code: 'FIGMA_NOT_CONFIGURED' }, 400),
   );

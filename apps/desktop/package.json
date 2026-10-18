@@ -1,0 +1,26 @@
+{
+  "name": "@petal/desktop",
+  "version": "0.1.0",
+  "productName": "Petal",
+  "description": "Petal: a visual React component editor with AI agents on the canvas",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "start": "env -u ELECTRON_RUN_AS_NODE electron .pack/app",
+    "start:debug": "env -u ELECTRON_RUN_AS_NODE electron .pack/app --remote-debugging-port=9335 --inspect=9336",
+    "package": "node scripts/build.mjs && electron-builder --mac --arm64",
+    "package:win": "node scripts/build.mjs && electron-builder --win --x64",
+    "smoke": "node scripts/smoke.mjs"
+  },
+  "dependencies": {
+    "@cursor/sdk": "1.0.34",
+    "@vscode/ripgrep": "1.17.1",
+    "node-pty": "1.1.0",
+    "zod": "4.3.6"
+  },
+  "devDependencies": {
+    "electron": "39.5.1",
+    "electron-builder": "^26.0.12",
+    "vite": "^7.1.0"
+  }
+}

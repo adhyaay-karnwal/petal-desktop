@@ -1,0 +1,16 @@
+{
+  "name": "petal",
+  "private": true,
+  "workspaces": ["apps/*"],
+  "scripts": {
+    "build": "npm run build -w @petal/desktop",
+    "start": "npm run start -w @petal/desktop",
+    "dev": "npm run build && npm start",
+    "package": "npm run package -w @petal/desktop",
+    "server": "npm run start -w @petal/server",
+    "typecheck": "npm run typecheck -w @petal/server"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}

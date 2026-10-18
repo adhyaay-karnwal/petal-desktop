@@ -1,0 +1,63 @@
+# Push a tag like v0.1.1 to build Petal for macOS (Apple Silicon) and Windows, smoke-test
+# both builds, and publish them as a GitHub Release. Installed apps pick up the release
+# through the in-app updater (apps/desktop/src/main/app/src/main/petalUpdater.js).
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos-14
+            target: --mac --arm64
+          - os: windows-latest
+            target: --win --x64
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Version from tag
+        if: startsWith(github.ref, 'refs/tags/v')
+        shell: bash
+        run: npm pkg set version="${GITHUB_REF_NAME#v}" -w @petal/desktop
+      - run: npm run build -w @petal/desktop
+      - name: Smoke test
+        run: npm run smoke -w @petal/desktop
+      - name: Package
+        working-directory: apps/desktop
+        run: npx electron-builder ${{ matrix.target }} --config electron-builder.yml --publish never
+      - uses: actions/upload-artifact@v4
+        with:
+          name: petal-${{ matrix.os }}
+          if-no-files-found: error
+          path: |
+            apps/desktop/dist/*.dmg
+            apps/desktop/dist/*.zip
+            apps/desktop/dist/*.exe
+
+  release:
+    needs: build
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+          merge-multiple: true
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" artifacts/* --repo "$GITHUB_REPOSITORY" --title "Petal ${GITHUB_REF_NAME#v}" --generate-notes

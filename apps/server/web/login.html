@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Log in</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root { color-scheme: dark; }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: #2a2a2a; color: #ededed; font: 14px/1.5 Inter, system-ui, sans-serif; }
+    .card { width: 360px; padding: 32px; border-radius: 16px; background: #222; border: 1px solid #333; }
+    h1 { margin: 0 0 4px; font-size: 18px; font-weight: 600; }
+    p.sub { margin: 0 0 24px; color: #9a9a9a; }
+    label { display: block; margin: 0 0 6px; color: #bdbdbd; font-size: 12px; font-weight: 500; }
+    input { width: 100%; height: 36px; margin: 0 0 14px; padding: 0 10px; border-radius: 8px; border: 1px solid #3a3a3a; background: #1a1a1a; color: inherit; font: inherit; }
+    input:focus { outline: none; border-color: #4c8dff; }
+    button { width: 100%; height: 36px; border: 0; border-radius: 8px; background: #ededed; color: #111; font: inherit; font-weight: 500; cursor: pointer; }
+    button:disabled { opacity: .6; cursor: default; }
+    .switch { margin-top: 16px; text-align: center; color: #9a9a9a; }
+    .switch a { color: #ededed; cursor: pointer; text-decoration: underline; }
+    .error { min-height: 20px; margin: 0 0 10px; color: #ff6b6b; }
+    .done { text-align: center; }
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <section id="form-view">
+      <h1 id="title">Log in</h1>
+      <p class="sub" id="subtitle">Continue to the desktop app.</p>
+      <form id="form">
+        <div id="name-row" hidden>
+          <label for="name">Name</label>
+          <input id="name" autocomplete="name" />
+        </div>
+        <label for="email">Email</label>
+        <input id="email" type="email" autocomplete="email" required />
+        <label for="password">Password</label>
+        <input id="password" type="password" autocomplete="current-password" minlength="8" required />
+        <div class="error" id="error"></div>
+        <button id="submit" type="submit">Log in</button>
+      </form>
+      <div class="switch" id="switch">No account? <a id="toggle">Sign up</a></div>
+    </section>
+    <section id="done-view" class="done" hidden>
+      <h1>You're signed in</h1>
+      <p class="sub" id="done-text">Returning to the desktop app…</p>
+      <button id="reopen" hidden>Open the desktop app</button>
+    </section>
+  </main>
+  <script>
+    const SCHEME = '__DESKTOP_SCHEME__';
+    const params = new URLSearchParams(location.search);
+    const electronKeys = ['client_id', 'code_challenge', 'code_challenge_method', 'state'];
+    const fromDesktop = params.get('client_id') === 'electron' && params.get('state');
+    const electronQuery = new URLSearchParams(electronKeys.filter((k) => params.get(k)).map((k) => [k, params.get(k)])).toString();
+    let mode = 'sign-in';
+
+    const $ = (id) => document.getElementById(id);
+    const base64url = (s) => btoa(String.fromCharCode(...new TextEncoder().encode(s))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+
+    function finish(code) {
+      $('form-view').hidden = true;
+      $('done-view').hidden = false;
+      if (!fromDesktop) { $('done-text').textContent = 'You can close this tab.'; return; }
+      const url = `${SCHEME}://auth/callback#token=${base64url(JSON.stringify({ identifier: code, state: params.get('state') }))}`;
+      $('reopen').hidden = false;
+      $('reopen').onclick = () => location.replace(url);
+      location.replace(url);
+    }
+
+    async function post(path, body) {
+      const res = await fetch(`/api/auth${path}${electronQuery ? `?${electronQuery}` : ''}`, {
+        method: 'POST', credentials: 'include', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data.message || data.error || `Request failed (${res.status})`);
+      return data;
+    }
+
+    // Already signed in in this browser: hand the existing session to the app.
+    (async () => {
+      if (!fromDesktop) return;
+      const session = await fetch('/api/auth/get-session', { credentials: 'include' }).then((r) => r.json()).catch(() => null);
+      if (!session?.user) return;
+      try { finish((await post('/electron/transfer-user', {})).electron_authorization_code); } catch {}
+    })();
+
+    $('toggle').onclick = () => {
+      mode = mode === 'sign-in' ? 'sign-up' : 'sign-in';
+      const up = mode === 'sign-up';
+      $('title').textContent = up ? 'Create your account' : 'Log in';
+      $('submit').textContent = up ? 'Sign up' : 'Log in';
+      $('name-row').hidden = !up;
+      $('password').autocomplete = up ? 'new-password' : 'current-password';
+      $('switch').firstChild.textContent = up ? 'Have an account? ' : 'No account? ';
+      $('toggle').textContent = up ? 'Log in' : 'Sign up';
+      $('error').textContent = '';
+    };
+
+    $('form').onsubmit = async (e) => {
+      e.preventDefault();
+      $('submit').disabled = true;
+      $('error').textContent = '';
+      const email = $('email').value.trim();
+      const password = $('password').value;
+      try {
+        const data = mode === 'sign-up'
+          ? await post('/sign-up/email', { email, password, name: $('name').value.trim() || email.split('@')[0] })
+          : await post('/sign-in/email', { email, password });
+        if (fromDesktop && !data.electron_authorization_code) {
+          finish((await post('/electron/transfer-user', {})).electron_authorization_code);
+        } else finish(data.electron_authorization_code);
+      } catch (err) {
+        $('error').textContent = err.message;
+        $('submit').disabled = false;
+      }
+    };
+  </script>
+</body>
+</html>

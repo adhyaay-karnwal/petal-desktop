@@ -1,0 +1,28 @@
+{
+  "name": "@petal/server",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "tsx src/index.ts",
+    "dev": "tsx watch src/index.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^9.6.0",
+    "@types/node": "^22.20.5",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
+  },
+  "dependencies": {
+    "@better-auth/electron": "^1.5.3",
+    "@hono/node-server": "^2.1.5",
+    "@tailwindcss/node": "^4.3.3",
+    "@tailwindcss/oxide": "^4.3.3",
+    "better-auth": "^1.5.3",
+    "better-sqlite3": "^12.11.1",
+    "esbuild": "^0.28.2",
+    "hono": "^4.13.13",
+    "tailwindcss": "^4.3.3"
+  }
+}

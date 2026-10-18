@@ -1,0 +1,59 @@
+appId: com.petal.desktop
+productName: Petal
+electronVersion: 39.5.1
+directories:
+  app: .pack/app
+  output: dist
+  buildResources: build
+files:
+  - out/**
+  - build/**
+  - package.json
+  - node_modules/**
+# Native modules are already rebuilt for Electron by scripts/build.mjs.
+npmRebuild: false
+# No asar: the built-in server spawns esbuild and loads native addons from disk.
+asar: false
+extraResources:
+  - from: .pack/app/resources/system-skills
+    to: system-skills
+  - from: .pack/app/resources/system-skills-agents
+    to: system-skills-agents
+# ELECTRON_RUN_AS_NODE in the environment must not turn Petal into a plain Node process.
+electronFuses:
+  runAsNode: false
+  enableNodeCliInspectArguments: false
+protocols:
+  - name: Petal
+    role: Editor
+    schemes: [com.petal.desktop]
+mac:
+  category: public.app-category.developer-tools
+  icon: build/icon.icns
+  # Arch comes from the CLI (--arm64 / --x64); zip is what the in-app updater downloads.
+  target: [dmg, zip]
+  # Ad-hoc signature: runs on any Mac after "Open Anyway" (no Apple Developer ID).
+  identity: "-"
+  hardenedRuntime: false
+  extendInfo:
+    NSCameraUsageDescription: Petal uses the camera when a design on the canvas asks for it, such as a photo booth or webcam preview.
+    NSMicrophoneUsageDescription: Petal uses the microphone when a design on the canvas asks for it.
+    NSAppTransportSecurity:
+      NSAllowsArbitraryLoads: true
+      NSAllowsLocalNetworking: true
+dmg:
+  title: Petal
+win:
+  icon: build/icon.ico
+  target:
+    - target: nsis
+      arch: [x64]
+# Per-user install into %LOCALAPPDATA%\Programs\Petal: no admin rights needed.
+nsis:
+  oneClick: true
+  perMachine: false
+  allowElevation: false
+  artifactName: Petal-Setup-${version}.${ext}
+  shortcutName: Petal
+artifactName: Petal-${version}-${arch}.${ext}
+publish: null

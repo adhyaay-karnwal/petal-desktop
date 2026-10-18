@@ -1,0 +1,82 @@
+// Reconstructed from index-C74mRL57.js — original module: vendor/unist-util-position
+
+/**
+* @typedef {import('unist').Node} Node
+* @typedef {import('unist').Point} Point
+* @typedef {import('unist').Position} Position
+*/
+/**
+* @typedef NodeLike
+* @property {string} type
+* @property {PositionLike | null | undefined} [position]
+*
+* @typedef PositionLike
+* @property {PointLike | null | undefined} [start]
+* @property {PointLike | null | undefined} [end]
+*
+* @typedef PointLike
+* @property {number | null | undefined} [line]
+* @property {number | null | undefined} [column]
+* @property {number | null | undefined} [offset]
+*/
+/**
+* Get the ending point of `node`.
+*
+* @param node
+*   Node.
+* @returns
+*   Point.
+*/
+var pointEnd = point$2("end");
+/**
+* Get the starting point of `node`.
+*
+* @param node
+*   Node.
+* @returns
+*   Point.
+*/
+var pointStart = point$2("start");
+/**
+* Get the positional info of `node`.
+*
+* @param {'end' | 'start'} type
+*   Side.
+* @returns
+*   Getter.
+*/
+function point$2(type) {
+	return point;
+	/**
+	* Get the point info of `node` at a bound side.
+	*
+	* @param {Node | NodeLike | null | undefined} [node]
+	* @returns {Point | undefined}
+	*/
+	function point(node) {
+		const point = node && node.position && node.position[type] || {};
+		if (typeof point.line === "number" && point.line > 0 && typeof point.column === "number" && point.column > 0) return {
+			line: point.line,
+			column: point.column,
+			offset: typeof point.offset === "number" && point.offset > -1 ? point.offset : void 0
+		};
+	}
+}
+/**
+* Get the positional info of `node`.
+*
+* @param {Node | NodeLike | null | undefined} [node]
+*   Node.
+* @returns {Position | undefined}
+*   Position.
+*/
+function position$1(node) {
+	const start = pointStart(node);
+	const end = pointEnd(node);
+	if (start && end) return {
+		start,
+		end
+	};
+}
+
+export { pointEnd, pointStart, position$1 };

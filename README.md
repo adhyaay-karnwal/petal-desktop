@@ -21,6 +21,26 @@ npm start          # run it
 npm run package    # → apps/desktop/dist/Petal-<version>-arm64.dmg (+ .zip)
 ```
 
+## Releases and updates
+
+Push a version tag and GitHub Actions builds, smoke-tests and publishes macOS (Apple
+Silicon) and Windows builds to a GitHub Release:
+
+```sh
+git tag v0.1.2 && git push origin v0.1.2
+```
+
+Installed apps check the release feed 10 s after launch, then every 30 min, and on
+**Check for Updates…** in the menu. The update downloads in the background, and
+"Restart" installs it (it also installs when you quit). The repo is private, so
+Petal reads releases with your GitHub connection. On a new computer, use
+**Connect GitHub…** in the menu and paste a token that can read this repo; a
+fine-grained token with Contents: read is enough.
+
+On Windows, run `Petal-Setup-<version>.exe`. It installs for your user
+(`%LOCALAPPDATA%\Programs\Petal`) without admin rights. It isn't code-signed, so
+SmartScreen asks once: **More info → Run anyway**.
+
 On another Mac, open the DMG and drag Petal to Applications. The app is ad-hoc
 signed (there is no Apple Developer ID), so the first launch is blocked: open
 **System Settings → Privacy & Security → Open Anyway**. Alternatively, run
@@ -59,6 +79,17 @@ The in-app chat uses your installed `claude` CLI and your own subscription.
 | `PETAL_API_PORT` / `PETAL_MCP_PORT` / `PETAL_GITHUB_OAUTH_PORT` | 4280 / 21229 / 23584 | |
 | `PETAL_BACKGROUND=1` | off | Testing: never take focus or show in the Dock |
 | `GITHUB_TOKEN`, `GITHUB_API_URL`, `FIGMA_TOKEN`, `ANTHROPIC_API_KEY` | | Read by the built-in server |
+
+## Website
+
+`apps/web` is the marketing site (Vite + React + Tailwind, static):
+`npm run build -w @petal/web` → `apps/web/dist`.
+
+## Brand
+
+The logo lives in `../tools/brand/v2` (static, animated and loader SVGs, plus icons).
+It recreates @Metagravity0's animated mark; ask them for permission before any
+public use.
 
 ## How the client is built
 

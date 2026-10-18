@@ -1,59 +1,24 @@
-// Reconstructed from index-C74mRL57.js — original module: packages/ui/src/components/EditorLoadingScreen.tsx
+// Project loading screen: the animated Petal mark.
 import { import_jsx_runtime } from "../../../../vendor/@tanstack/react-query.js";
-import { import_compiler_runtime } from "../../../cloud/src/hooks/useSession.js";
 import { cn$2 } from "../lib/utils.js";
 
-/** A stable surface between selecting a file and painting its editor. */
-function EditorLoadingScreen(t0) {
-	const $ = (0, import_compiler_runtime.c)(9);
-	const { className, logoSrc } = t0;
-	let t1;
-	if ($[0] !== className) {
-		t1 = cn$2("flex h-full w-full items-center justify-center bg-ed-background", className);
-		$[0] = className;
-		$[1] = t1;
-	} else t1 = $[1];
-	let t2;
-	if ($[2] === Symbol.for("react.memo_cache_sentinel")) {
-		t2 = /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+var PETAL_ANIMATED = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiByb2xlPSJpbWciIGFyaWEtbGFiZWw9IlBldGFsIj48dGl0bGU+UGV0YWw8L3RpdGxlPjxzdHlsZT4ucGV0YWwtbHtmaWxsOm5vbmU7c3Ryb2tlOiNGNDcyQjY7c3Ryb2tlLXdpZHRoOjMuNjM1fS5wZXRhbC11e3N0cm9rZS13aWR0aDoxLjkwNX0ucGV0YWwtYXt0cmFuc2Zvcm06dHJhbnNsYXRlKDE0LjkzOXB4LC0yMS41NzRweCk7YW5pbWF0aW9uOnBldGFsLWthIDEwcyBsaW5lYXIgaW5maW5pdGV9LnBldGFsLWJ7dHJhbnNmb3JtOnRyYW5zbGF0ZSgtMTguNDA4cHgsLTAuMDQxcHgpO2FuaW1hdGlvbjpwZXRhbC1rYSAxMHMgbGluZWFyIC01cyBpbmZpbml0ZX0ucGV0YWwtY3t0cmFuc2Zvcm06dHJhbnNsYXRlKC0xNi4yMzdweCwtMjcuOTU3cHgpO2FuaW1hdGlvbjpwZXRhbC1rYyA1cyBsaW5lYXIgaW5maW5pdGV9QGtleWZyYW1lcyBwZXRhbC1rYXswJXt0cmFuc2Zvcm06dHJhbnNsYXRlKDE0LjkzOXB4LC0yMS41NzRweCl9My42MyV7dHJhbnNmb3JtOnRyYW5zbGF0ZSgxNC45MzlweCwtMjEuNTc0cHgpO2FuaW1hdGlvbi10aW1pbmctZnVuY3Rpb246Y3ViaWMtYmV6aWVyKDAuNzYzLDAuMDE5LDAuMTczLDAuOTg3KX05LjkxJXt0cmFuc2Zvcm06dHJhbnNsYXRlKC02NS43M3B4LC0xNS40OXB4KX0xMy42MyV7dHJhbnNmb3JtOnRyYW5zbGF0ZSgtNjUuNzNweCwtMTUuNDlweCk7YW5pbWF0aW9uLXRpbWluZy1mdW5jdGlvbjpjdWJpYy1iZXppZXIoMC43NjMsMC4wMTksMC4xNzMsMC45ODcpfTE5LjkxJXt0cmFuc2Zvcm06dHJhbnNsYXRlKC02NS4wOTRweCwtMTUuNDg3cHgpfTIzLjYzJXt0cmFuc2Zvcm06dHJhbnNsYXRlKC02NS4wOTRweCwtMTUuNDg3cHgpO2FuaW1hdGlvbi10aW1pbmctZnVuY3Rpb246Y3ViaWMtYmV6aWVyKDAuNzYzLDAuMDE5LDAuMTczLDAuOTg3KX0yOS45MSV7dHJhbnNmb3JtOnRyYW5zbGF0ZSgtMjMuMzY3cHgsLTI2LjYyM3B4KX0zMy42MyV7dHJhbnNmb3JtOnRyYW5zbGF0ZSgtMjMuMzY3cHgsLTI2LjYyM3B4KTthbmltYXRpb24tdGltaW5nLWZ1bmN0aW9uOmN1YmljLWJlemllcigwLjc2MywwLjAxOSwwLjE3MywwLjk4Nyl9MzkuOTEle3RyYW5zZm9ybTp0cmFuc2xhdGUoLTUxLjY5MXB4LC0wLjAwNnB4KX00My42MyV7dHJhbnNmb3JtOnRyYW5zbGF0ZSgtNTEuNjkxcHgsLTAuMDA2cHgpO2FuaW1hdGlvbi10aW1pbmctZnVuY3Rpb246Y3ViaWMtYmV6aWVyKDAuNzYzLDAuMDE5LDAuMTczLDAuOTg3KX00OS45MSV7dHJhbnNmb3JtOnRyYW5zbGF0ZSgtMTguNDA4cHgsLTAuMDQxcHgpfTUzLjYzJXt0cmFuc2Zvcm06dHJhbnNsYXRlKC0xOC40MDhweCwtMC4wNDFweCk7YW5pbWF0aW9uLXRpbWluZy1mdW5jdGlvbjpjdWJpYy1iZXppZXIoMC43NjMsMC4wMTksMC4xNzMsMC45ODcpfTU5LjkxJXt0cmFuc2Zvcm06dHJhbnNsYXRlKC0xOS4wNzlweCwtMC4wMjZweCl9NjMuNjMle3RyYW5zZm9ybTp0cmFuc2xhdGUoLTE5LjA3OXB4LC0wLjAyNnB4KTthbmltYXRpb24tdGltaW5nLWZ1bmN0aW9uOmN1YmljLWJlemllcigwLjc2MywwLjAxOSwwLjE3MywwLjk4Nyl9NjkuOTEle3RyYW5zZm9ybTp0cmFuc2xhdGUoLTE5LjA1NXB4LC0wLjAwNnB4KX03My42MyV7dHJhbnNmb3JtOnRyYW5zbGF0ZSgtMTkuMDU1cHgsLTAuMDA2cHgpO2FuaW1hdGlvbi10aW1pbmctZnVuY3Rpb246Y3ViaWMtYmV6aWVyKDAuNzYzLDAuMDE5LDAuMTczLDAuOTg3KX03OS45MSV7dHJhbnNmb3JtOnRyYW5zbGF0ZSg3LjkwNXB4LC05LjMyM3B4KX04My42MyV7dHJhbnNmb3JtOnRyYW5zbGF0ZSg3LjkwNXB4LC05LjMyM3B4KTthbmltYXRpb24tdGltaW5nLWZ1bmN0aW9uOmN1YmljLWJlemllcigwLjc2MywwLjAxOSwwLjE3MywwLjk4Nyl9ODkuOTEle3RyYW5zZm9ybTp0cmFuc2xhdGUoNTIuOTEycHgsLTIuNTU1cHgpfTkzLjYzJXt0cmFuc2Zvcm06dHJhbnNsYXRlKDUyLjkxMnB4LC0yLjU1NXB4KTthbmltYXRpb24tdGltaW5nLWZ1bmN0aW9uOmN1YmljLWJlemllcigwLjc2MywwLjAxOSwwLjE3MywwLjk4Nyl9OTkuOTEle3RyYW5zZm9ybTp0cmFuc2xhdGUoMTQuOTM5cHgsLTIxLjU3NHB4KX0xMDAle3RyYW5zZm9ybTp0cmFuc2xhdGUoMTQuOTM5cHgsLTIxLjU3NHB4KX19QGtleWZyYW1lcyBwZXRhbC1rY3swJXt0cmFuc2Zvcm06dHJhbnNsYXRlKC0xNi4yMzdweCwtMjcuOTU3cHgpfTcuMjYle3RyYW5zZm9ybTp0cmFuc2xhdGUoLTE2LjIzN3B4LC0yNy45NTdweCk7YW5pbWF0aW9uLXRpbWluZy1mdW5jdGlvbjpjdWJpYy1iZXppZXIoMC43NjMsMC4wMTksMC4xNzMsMC45ODcpfTE5LjgyJXt0cmFuc2Zvcm06dHJhbnNsYXRlKC0xNi4zMDhweCwtMjcuOTA0cHgpfTI3LjI2JXt0cmFuc2Zvcm06dHJhbnNsYXRlKC0xNi4zMDhweCwtMjcuOTA0cHgpO2FuaW1hdGlvbi10aW1pbmctZnVuY3Rpb246Y3ViaWMtYmV6aWVyKDAuNzYzLDAuMDE5LDAuMTczLDAuOTg3KX0zOS44MiV7dHJhbnNmb3JtOnRyYW5zbGF0ZSgtNDQuNjI1cHgsLTYuNDg5cHgpfTQ3LjI2JXt0cmFuc2Zvcm06dHJhbnNsYXRlKC00NC42MjVweCwtNi40ODlweCk7YW5pbWF0aW9uLXRpbWluZy1mdW5jdGlvbjpjdWJpYy1iZXppZXIoMC43NjMsMC4wMTksMC4xNzMsMC45ODcpfTU5LjgyJXt0cmFuc2Zvcm06dHJhbnNsYXRlKDE5LjM2cHgsLTQ1LjI2M3B4KX02Ny4yNiV7dHJhbnNmb3JtOnRyYW5zbGF0ZSgxOS4zNnB4LC00NS4yNjNweCk7YW5pbWF0aW9uLXRpbWluZy1mdW5jdGlvbjpjdWJpYy1iZXppZXIoMC43NjMsMC4wMTksMC4xNzMsMC45ODcpfTc5LjgyJXt0cmFuc2Zvcm06dHJhbnNsYXRlKC0xMi4zNDFweCwtNDguNDg5cHgpfTg3LjI2JXt0cmFuc2Zvcm06dHJhbnNsYXRlKC0xMi4zNDFweCwtNDguNDg5cHgpO2FuaW1hdGlvbi10aW1pbmctZnVuY3Rpb246Y3ViaWMtYmV6aWVyKDAuNzYzLDAuMDE5LDAuMTczLDAuOTg3KX05OS44MiV7dHJhbnNmb3JtOnRyYW5zbGF0ZSgtMTYuMjM3cHgsLTI3Ljk1N3B4KX0xMDAle3RyYW5zZm9ybTp0cmFuc2xhdGUoLTE2LjIzN3B4LC0yNy45NTdweCl9fUBtZWRpYSAocHJlZmVycy1yZWR1Y2VkLW1vdGlvbjpyZWR1Y2Upey5wZXRhbC1hLC5wZXRhbC1iLC5wZXRhbC1je2FuaW1hdGlvbjpub25lfX08L3N0eWxlPjxkZWZzPjxmaWx0ZXIgaWQ9InBldGFsLWdvbyIgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCIgaGVpZ2h0PSIxMDAiIGZpbHRlclVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY29sb3ItaW50ZXJwb2xhdGlvbi1maWx0ZXJzPSJzUkdCIj48ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSIxLjg3OCIvPjxmZUNvbG9yTWF0cml4IHZhbHVlcz0iMSAwIDAgMCAwIDAgMSAwIDAgMCAwIDAgMSAwIDAgMCAwIDAgMjQgLTEzLjY4NCIvPjwvZmlsdGVyPjxjbGlwUGF0aCBpZD0icGV0YWwtY2xpcCI+PGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgcj0iNDYuNTYiLz48L2NsaXBQYXRoPjwvZGVmcz48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI0Ni41NiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRjQ3MkI2IiBzdHJva2Utd2lkdGg9IjIuNTM0Ii8+PGcgY2xpcC1wYXRoPSJ1cmwoI3BldGFsLWNsaXApIj48Y2lyY2xlIGNsYXNzPSJwZXRhbC1sIHBldGFsLWEgcGV0YWwtdSIgY3g9IjUwIiBjeT0iNTAiIHI9IjQ2Ljc5NiIvPjxjaXJjbGUgY2xhc3M9InBldGFsLWwgcGV0YWwtYiBwZXRhbC11IiBjeD0iNTAiIGN5PSI1MCIgcj0iNDYuNzk2Ii8+PGNpcmNsZSBjbGFzcz0icGV0YWwtbCBwZXRhbC1jIHBldGFsLXUiIGN4PSI1MCIgY3k9IjUwIiByPSI0Ni43OTYiLz48L2c+PGcgZmlsdGVyPSJ1cmwoI3BldGFsLWdvbykiPjxjaXJjbGUgY3g9IjUwIiBjeT0iNTAiIHI9IjQ2LjU2IiBmaWxsPSJub25lIiBzdHJva2U9IiNGNDcyQjYiIHN0cm9rZS13aWR0aD0iNC4wNiIvPjxnIGNsaXAtcGF0aD0idXJsKCNwZXRhbC1jbGlwKSI+PGNpcmNsZSBjbGFzcz0icGV0YWwtbCBwZXRhbC1hIiBjeD0iNTAiIGN5PSI1MCIgcj0iNDYuNzk2Ii8+PGNpcmNsZSBjbGFzcz0icGV0YWwtbCBwZXRhbC1iIiBjeD0iNTAiIGN5PSI1MCIgcj0iNDYuNzk2Ii8+PGNpcmNsZSBjbGFzcz0icGV0YWwtbCBwZXRhbC1jIiBjeD0iNTAiIGN5PSI1MCIgcj0iNDYuNzk2Ii8+PC9nPjwvZz48L3N2Zz4K";
+function EditorLoadingScreen({ className }) {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+		role: "status",
+		className: cn$2("flex h-full w-full items-center justify-center bg-ed-background", className),
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 			className: "sr-only",
 			children: "Loading project..."
-		});
-		$[2] = t2;
-	} else t2 = $[2];
-	let t3;
-	if ($[3] === Symbol.for("react.memo_cache_sentinel")) {
-		t3 = /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute inset-0 rounded-full border-[1.5px] border-ed-border border-t-ed-foreground-secondary motion-safe:animate-spin" });
-		$[3] = t3;
-	} else t3 = $[3];
-	let t4;
-	if ($[4] !== logoSrc) {
-		t4 = /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-			"aria-hidden": "true",
-			className: "relative flex size-10 items-center justify-center",
-			children: [t3, /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
-				src: logoSrc,
-				alt: "",
-				width: 24,
-				height: 24,
-				className: "size-6 rounded-sm opacity-50 mix-blend-multiply [.editor-dark_&]:invert [.editor-dark_&]:mix-blend-screen"
-			})]
-		});
-		$[4] = logoSrc;
-		$[5] = t4;
-	} else t4 = $[5];
-	let t5;
-	if ($[6] !== t1 || $[7] !== t4) {
-		t5 = /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-			role: "status",
-			className: t1,
-			children: [t2, t4]
-		});
-		$[6] = t1;
-		$[7] = t4;
-		$[8] = t5;
-	} else t5 = $[8];
-	return t5;
+		}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+			src: PETAL_ANIMATED,
+			alt: "",
+			"aria-hidden": true,
+			width: 40,
+			height: 40,
+			className: "size-10"
+		})]
+	});
 }
 
 export { EditorLoadingScreen };

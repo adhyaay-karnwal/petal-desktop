@@ -2,7 +2,8 @@
  * Petal logo. This is the only place the brand mark is referenced.
  * To swap in a new mark, change the import below (e.g. `./v2/logo.svg`).
  */
-import markUrl from './flower.svg';
+// Animated Petal mark (recreation of @Metagravity0's logo; see tools/brand/v2/NOTES.md).
+import markUrl from './v2/logo-animated-pink.svg';
 
 export const LOGO_MARK_URL = markUrl;
 

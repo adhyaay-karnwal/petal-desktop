@@ -1,19 +1,17 @@
-// Petal mark: six pink petals (brand pink, Tailwind pink-400).
+// Petal mark (brand pink).
 import { import_jsx_runtime } from "../../../../vendor/@tanstack/react-query.js";
 
-var PETAL_D = "M 0,22 C 11,22 14,18 14,12 S 2,0 0,0 -14,6 -14,12 -11,22 0,22 Z";
-var PETAL_PINK = "#F472B6";
-function PetalLogo(props) {
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("svg", {
-		viewBox: "-3 -3 106 106",
-		xmlns: "http://www.w3.org/2000/svg",
+var PETAL_MARK = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiBmaWxsPSIjRjQ3MkI2IiByb2xlPSJpbWciIGFyaWEtbGFiZWw9IlBldGFsIj48dGl0bGU+UGV0YWw8L3RpdGxlPjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTIgNTBBNDggNDggMCAxIDEgOTggNTBBNDggNDggMCAxIDEgMiA1MFpNNzkuNDI0IDE5Ljg1N0E0NS43MTQgNDUuNzE0IDAgMCAxIDc5LjA5NSAyNy45MzVBMi40MzggMi40MzggMCAwIDEgNzQuNDkzIDI4LjcwM0E0Ny44NzggNDcuODc4IDAgMCAwIDU3LjYyNyA5Ljc3OUEyLjE2OCAyLjE2OCAwIDAgMSA1OS4yNSA1LjgzOEE0NS4xMiA0NS4xMiAwIDAgMSA3NS40NDQgMTIuNzM4QTkuMTUgOS4xNSAwIDAgMSA3OS40MjQgMTkuODU3Wk03My44NzcgNDMuOTY1QTQ1LjcxNCA0NS43MTQgMCAwIDEgNDUuNjE2IDY2LjE5M0ExMC4xNzYgMTAuMTc2IDAgMCAxIDM2LjY4OCA2NC4zNjVBNDUuNzE0IDQ1LjcxNCAwIDAgMSAyMC4wNDkgMTkuNzkyQTExLjMwOSAxMS4zMDkgMCAwIDEgMjQuODUxIDEyLjUzOUE0NS4xMiA0NS4xMiAwIDAgMSAzNy40NzIgNi42NTRBMTUuNjUxIDE1LjY1MSAwIDAgMSA0Ny4xNDEgNi45NzFBNDUuNzE0IDQ1LjcxNCAwIDAgMSA3NC42MTMgMzQuNTAyQTExLjU3MyAxMS41NzMgMCAwIDEgNzMuODc3IDQzLjk2NVpNODguODE0IDY3LjQxQTQ1LjcxNCA0NS43MTQgMCAwIDEgNzkuNDkgNzEuNzYyQTIuODQ4IDIuODQ4IDAgMCAxIDc1Ljk0NSA2Ny45ODlBNDcuODc4IDQ3Ljg3OCAwIDAgMCA3OS4xMDIgNDQuMDRBMjIuMDU3IDIyLjA1NyAwIDAgMSA3OS43ODcgMzUuMjM1QTQ3Ljg3OCA0Ny44NzggMCAwIDAgODEuNTkgMjQuMjQzQTIuNDggMi40OCAwIDAgMSA4Ni4wNSAyMi44NjVBNDUuMTIgNDUuMTIgMCAwIDEgOTMuOTE0IDYwLjM2M0ExMS4zMDkgMTEuMzA5IDAgMCAxIDg4LjgxNCA2Ny40MVpNMzAuMDc5IDY3LjYwOEE0NS43MTQgNDUuNzE0IDAgMCAxIDkuMjM4IDYwLjYyMUE5LjE1IDkuMTUgMCAwIDEgNS4wMjYgNTMuNjM2QTQ1LjEyIDQ1LjEyIDAgMCAxIDEyLjk2MyAyNC4yMjlBMi4yOTYgMi4yOTYgMCAwIDEgMTcuMTQxIDI1LjY3M0E0Ny44NzggNDcuODc4IDAgMCAwIDMyLjAzOSA2My4yMDlBMi41NTMgMi41NTMgMCAwIDEgMzAuMDc5IDY3LjYwOFpNNjUuNzg5IDc0LjEzMkE0NS43MTQgNDUuNzE0IDAgMCAxIDUwLjQzNCA3MS43NzdBMi41NTggMi41NTggMCAwIDEgNTAuMzU5IDY2Ljk1MkE0Ny44NzggNDcuODc4IDAgMCAwIDcyLjg1NCA0OS42ODZBMi40NDIgMi40NDIgMCAwIDEgNzcuMjkgNTEuMTZBNDUuNzE0IDQ1LjcxNCAwIDAgMSA3Mi44OTkgNjkuNTQxQTguMDMzIDguMDMzIDAgMCAxIDY1Ljc4OSA3NC4xMzJaTTM3LjI4IDkzLjI5QTQ1LjEyIDQ1LjEyIDAgMCAxIDguNTY4IDY3Ljg2N0EyLjQ4IDIuNDggMCAwIDEgMTEuOTc0IDY0LjY3NkE0Ny44NzggNDcuODc4IDAgMCAwIDM1Ljc1NiA2OS44NzlBMTguMDkyIDE4LjA5MiAwIDAgMSA0NC4zMDYgNzEuNjNBNDcuODc4IDQ3Ljg3OCAwIDAgMCA2My4xMjIgNzYuMjY5QTIuODQ4IDIuODQ4IDAgMCAxIDY1LjEwMiA4MS4wNTNBNDUuNzE0IDQ1LjcxNCAwIDAgMSA0Ni45NSA5My4wMTVBMTUuNjUxIDE1LjY1MSAwIDAgMSAzNy4yOCA5My4yOVpNODcuMTUzIDc1LjYwM0E0NS4xMiA0NS4xMiAwIDAgMSA1OS4wNTQgOTQuMjAzQTIuMTY4IDIuMTY4IDAgMCAxIDU3LjQ0OCA5MC4yNTVBNDcuODc4IDQ3Ljg3OCAwIDAgMCA2OS4zMyA3OS40MjNBMTIuNTcxIDEyLjU3MSAwIDAgMSA3Ni4yNjUgNzQuOTQ1QTQ3Ljg3OCA0Ny44NzggMCAwIDAgODQuMzMyIDcyLjIwMUEyLjI5NiAyLjI5NiAwIDAgMSA4Ny4xNTMgNzUuNjAzWiIvPjwvc3ZnPgo=";
+function PetalLogo({ width, height, className, style }) {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+		src: PETAL_MARK,
+		alt: "",
 		"aria-hidden": true,
-		...props,
-		fill: PETAL_PINK,
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("g", {
-			transform: "translate(50, 50)",
-			children: [(0, import_jsx_runtime.jsx)("path", { d: PETAL_D, transform: "rotate(0) translate(0,10) scale(1,1.8)" }),(0, import_jsx_runtime.jsx)("path", { d: PETAL_D, transform: "rotate(60) translate(0,10) scale(1,1.8)" }),(0, import_jsx_runtime.jsx)("path", { d: PETAL_D, transform: "rotate(120) translate(0,10) scale(1,1.8)" }),(0, import_jsx_runtime.jsx)("path", { d: PETAL_D, transform: "rotate(180) translate(0,10) scale(1,1.8)" }),(0, import_jsx_runtime.jsx)("path", { d: PETAL_D, transform: "rotate(240) translate(0,10) scale(1,1.8)" }),(0, import_jsx_runtime.jsx)("path", { d: PETAL_D, transform: "rotate(300) translate(0,10) scale(1,1.8)" }),]
-		})
+		draggable: false,
+		width,
+		height,
+		className,
+		style
 	});
 }
 
